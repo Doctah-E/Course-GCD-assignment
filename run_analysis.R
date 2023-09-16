@@ -88,7 +88,7 @@ names(Aggregated)[3:88] <- str_sub(names(Aggregated)[3:88], end = -3)
 
 save(Aggregated, file = "Aggregated.RData")
 
-
+write.table(Aggregated, file = "Aggregated.txt", row.name = F)
 
 
 
