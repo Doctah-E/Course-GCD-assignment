@@ -1,24 +1,9 @@
 # Final assignment Course Getting cleaning data
 
-
-# You should create one R script called run_analysis.R that does the following.
-# 
-# 1. Merges the training and the test sets to create one data set.
-# 
-# 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-# 
-# 3. Uses descriptive activity names to name the activities in the data set
-# 
-# 4. Appropriately labels the data set with descriptive variable names.
-# 
-# 5. From the data set in step 4, creates a second, independent tidy data set with
-# the average of each variable for each activity and each subject.
-
 setwd("C:/Surfdrive/R/Coursera/Getting and cleaning data/Course-GCD-assignment/UCI HAR Dataset")
 library(dplyr)
 library(summarytools)
 library(stringr)
-
 
 ##  Look at X train file
 ### width variables 16 (counted in Notepad++)
@@ -65,7 +50,6 @@ train <- cbind(subj_train, train)
 ### call it "person"
 names(train)[1] <- "person"
 
-
 ## Then follow exactly the same procedure for the test data
 x_test <- read.fwf("test/X_test.txt", widths = rep(16, 561), header = F)
 x_test <- as_tibble(x_test)
@@ -84,7 +68,6 @@ data <- rbind(train, test)
 ### And we don't need the other df's any longer
 rm(feat, labs, test, train, x_test, x_train, y_test, y_train, subj_test, subj_train)
 
-
 ## Use only variables that are a mean or SD (Assignment step 2)
 ### Keep first column with the person and second with activity
 names(data)
@@ -92,22 +75,22 @@ keep <- grep("[Mm]ean|[Ss]td", names(data))
 keep
 data <- data[,c(1, 2, keep)]
 
-
 ## Create a tibble now that the duplicate names are gone
 data <- as_tibble(data)
 data            # looks good
 
-
-## Create a new datasets with means of all vars
+## Create a new datasets with means of all vars by person-activity
 aggr <- data %>% 
     group_by(person, activity) %>% 
     summarise(across(everything(), list(mean)))
-names(aggr)[3:88] <- substr(names(aggr)[3:88], end = -2)
-
+### clean up labels
+names(aggr)[3:88] <- str_sub(names(aggr)[3:88], end = -3)
 
 ## Create a codebook
-
-
+attributes(data)
+library(vtable)
+setwd("C:/Surfdrive/R/Coursera/Getting and cleaning data/Course-GCD-assignment")
+vt(aggr, lush = T, file = "Codebook.html")
 
 
 
