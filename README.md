@@ -1,6 +1,6 @@
 # Course-GCD-assignment
 
-The codebook that describes the data generated in the final step of the assignment is generated in the Codebook.Rmd file, which produces codebook.html.
+The codebook that describes the data generated in the final step of the assignment is generated in the Codebook.Rmd file, which produces codebook.pdf.
 
 This document explains the steps taken in the run_analysis.R file. These are also explained in the script itself. 
 
