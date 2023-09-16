@@ -86,11 +86,8 @@ Aggregated <- data %>%
 ### clean up labels
 names(Aggregated)[3:88] <- str_sub(names(Aggregated)[3:88], end = -3)
 
-## Create a codebook
-attributes(data)
-library(vtable)
-setwd("C:/Surfdrive/R/Coursera/Getting and cleaning data/Course-GCD-assignment")
-vt(Aggregated, lush = T, file = "Codebook.html")
+save(Aggregated, file = "Aggregated.RData")
+
 
 
 
