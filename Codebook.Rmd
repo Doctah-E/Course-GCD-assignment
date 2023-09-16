@@ -1,6 +1,6 @@
 ---
 title: "Codebook GCD assignment"
-output: html_document
+output: pdf_document
 date: "2023-09-16"
 ---
 
@@ -23,7 +23,8 @@ The dataset contains several measures of physical activity across six different 
 
 ```{r pressure, echo=FALSE}
 
-vt(Aggregated, lush = T)
+vt(Aggregated, lush = T) %>% 
+    kable_styling(latex_options = c("striped", "scale_down"))
 
 ```
 
