@@ -80,17 +80,17 @@ data <- as_tibble(data)
 data            # looks good
 
 ## Create a new datasets with means of all vars by person-activity
-aggr <- data %>% 
+Aggregated <- data %>% 
     group_by(person, activity) %>% 
     summarise(across(everything(), list(mean)))
 ### clean up labels
-names(aggr)[3:88] <- str_sub(names(aggr)[3:88], end = -3)
+names(Aggregated)[3:88] <- str_sub(names(Aggregated)[3:88], end = -3)
 
 ## Create a codebook
 attributes(data)
 library(vtable)
 setwd("C:/Surfdrive/R/Coursera/Getting and cleaning data/Course-GCD-assignment")
-vt(aggr, lush = T, file = "Codebook.html")
+vt(Aggregated, lush = T, file = "Codebook.html")
 
 
 
